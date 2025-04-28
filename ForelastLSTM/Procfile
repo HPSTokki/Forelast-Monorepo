@@ -1,0 +1,1 @@
+web: gunicorn forelast_backend.wsgi
