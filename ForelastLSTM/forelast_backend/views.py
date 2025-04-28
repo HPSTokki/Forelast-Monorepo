@@ -10,7 +10,6 @@ import logging
 from datetime import datetime, timedelta
 from django.http import HttpResponse
 
-load_dotenv()
 
 # Configure logging
 logger = logging.getLogger(__name__)
