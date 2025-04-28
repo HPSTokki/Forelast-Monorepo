@@ -30,6 +30,8 @@ if ENVIRONMENT != 'production':
 
 SUPABASE_URL = os.getenv('SUPABASE_URL')
 SUPABASE_KEY = os.getenv('SUPABASE_KEY')
+SUPABASE_SERVICE_ROLE_KEY = os.getenv('SUPABASE_SERVICE_ROLE_KEY')
+SUPABASE_ANON_KEY = os.getenv('SUPABASE_ANON_KEY')
 DB_NAME = os.getenv('DB_NAME')
 DB_USER = os.getenv('DB_USER')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
@@ -43,6 +45,15 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_OTP = os.getenv('EMAIL_OTP')
 EMAIL_OTP_PASSWORD = os.getenv('EMAIL_OTP_PASSWORD')
+
+DB_DATA = {
+    print("SUPABASE_URL: ", SUPABASE_URL),
+    print("SUPABASE_KEY: ", SUPABASE_KEY),
+    print("SUPABASE_SERVICE_ROLE_KEY: ", SUPABASE_SERVICE_ROLE_KEY),
+    print("SUPABASE_ANON_KEY: ", SUPABASE_ANON_KEY),
+}
+
+print("DB_DATA: ", DB_DATA)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
