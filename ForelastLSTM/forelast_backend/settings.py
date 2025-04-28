@@ -12,10 +12,21 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path
-from dotenv import load_dotenv
 
 # Environment Variables Access:
-load_dotenv()
+
+import os
+
+ENVIRONMENT = os.getenv('ENVIRONMENT')
+
+# Log the current environment
+print(f"Running in ENVIRONMENT: {ENVIRONMENT}")
+
+if ENVIRONMENT != 'production':
+    from dotenv import load_dotenv
+    load_dotenv()
+
+    
 
 SUPABASE_URL = os.getenv('SUPABASE_URL')
 SUPABASE_KEY = os.getenv('SUPABASE_KEY')
