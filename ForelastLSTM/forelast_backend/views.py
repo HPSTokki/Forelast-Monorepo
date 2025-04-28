@@ -5,7 +5,7 @@ from django.utils.decorators import method_decorator
 import pandas as pd
 from supabase import create_client
 import os
-from dotenv import load_dotenv
+
 import logging
 from datetime import datetime, timedelta
 from django.http import HttpResponse
@@ -14,6 +14,11 @@ from django.http import HttpResponse
 # Configure logging
 logger = logging.getLogger(__name__)
 
+ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
+
+if ENVIRONMENT != 'production':
+    from dotenv import load_dotenv
+    load_dotenv()
 
 class CurrentWeatherAPI(View):
     """API endpoint for getting current weather data only"""
