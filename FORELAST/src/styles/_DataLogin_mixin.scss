@@ -1,0 +1,306 @@
+@use "@/styles/variables.scss" as vars;
+
+// DataLogin Mixin
+@mixin DataLogin {
+    height: 100%;
+    font-family: 'Inter', serif;
+    background-color: vars.$panel-color;
+    color: vars.$font-color;
+    box-shadow: vars.$box-shadow;
+    z-index: 1;
+
+    .header{
+        h2  {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+        }
+    }
+
+    .loginForm {
+        margin-top: 50px;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: vars.$primary-font;
+
+        .login{
+            width: 40%;
+            box-shadow: vars.$box-shadow;
+            padding: 20px;
+            background-color: #FFFFFF;
+            border-radius: vars.$border-radius;
+
+            h2{
+                text-align: center;
+                font-weight: bold;
+                margin-top: 5px;
+            }
+
+            .name,
+            .pass {
+                margin-top: 15px;
+                padding-right: 20px;
+                margin-bottom: 15px;
+                display: flex;
+                flex-direction: column;
+
+                .validation-message {
+                    color: red;
+                }
+            }
+
+            label {
+                display: block;
+                margin-bottom: 5px;
+                font-size: 15px;
+                font-weight: bolder;
+            }
+
+            input {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                background-color: #e0e0e0;
+                font-size: 16px;
+                font-family: vars.$primary-font;
+            }
+
+            .pass-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .forgot-password {
+                font-size: 12px;
+                color: #666;
+                
+
+                a {
+                    text-decoration: none;
+                    color: #666;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            .loginbt {
+                display: flex;
+                justify-content: flex-end;
+                margin-top: 15px;
+
+                .btn {
+                    background-color: vars.$accent-color;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    width: 30%;
+                    transition: 0.3s ease-in-out;
+                    font-family: vars.$primary-font;
+                    padding: 2%;
+    
+                    &:hover {
+                        background-color: vars.$button-hover;
+                        color: vars.$panel-color;
+                    }
+                }
+            }
+
+            
+            .regs {
+                text-align: center;
+                padding: 10px;
+            }
+
+            .reg {
+                margin-top: 10px;
+                font-size: 14px;
+
+                a {
+                    color: vars.$accent-color;
+                    text-decoration: none;
+                    font-weight: bold;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            .terms a {
+                font-size: 15px;
+                color: vars.$font-color;
+                text-decoration: none;
+                margin-top: 15px;
+                font-family: vars.$primary-font;
+                font-size: vars.$larger-smalltext;
+                text-decoration: underline;
+
+                &:hover {
+                    color: vars.$accent-color;
+                    font-weight: bold;;
+                }
+            }
+        }
+    }
+
+    // Mobile-Specific Styles
+    @media (max-width: 768px) {
+        .header{
+            height: 45px;
+    
+            h2  {
+                font-size: vars.$mobile-largetext;
+            }
+
+            p {
+                font-size: vars.$mobile-fsize;
+            }
+        }
+
+        .loginForm {
+            margin-top: 70px;
+
+            .login{
+                width: 80%;
+                padding: 20px;
+    
+                h2{
+                    margin-top: 5px;
+                }
+    
+                .name,
+                .pass {
+                    margin-top: 15px;
+                    padding-right: 20px;
+                    margin-bottom: 15px;
+
+                    .validation-message {
+                        font-size: vars.$mobile-smalltext;
+                    }
+                }
+    
+                label {
+                    margin-bottom: 5px;
+                    font-size: vars.$mobile-smalltext;
+                }
+    
+                input {
+                    width: 100%;
+                    padding: 10px;
+                    border-radius: 5px;
+                    font-size: vars.$mobile-smalltext;
+                }
+    
+                .forgot-password {
+                    font-size: vars.$mobile-smalltext;
+                }
+    
+                .loginbt {
+                    margin-top: 15px;
+    
+                    .btn {
+                        padding: 2%;
+                        font-size: vars.$mobile-smalltext;
+                    }
+                }
+    
+                
+                .regs {
+                    padding: 10px;
+                }
+    
+                .reg {
+                    margin-top: 10px;
+                    font-size: vars.$mobile-smalltext;
+                }
+    
+                .terms a {
+                    font-size: vars.$mobile-smalltext;
+                    margin-top: 15px;
+                }
+            }
+        }
+    }
+
+    // Larger Screens 
+    @media (min-width: 769px) {
+        .header{
+            height: 45px;
+    
+            h2  {
+                font-size: vars.$larger-largetext;
+            }
+        }
+
+        .loginForm {
+            margin-top: 50px;
+
+            .login{
+                width: 40%;
+                padding: 20px;
+    
+                h2{
+                    margin-top: 5px;
+                }
+    
+                .name,
+                .pass {
+                    margin-top: 15px;
+                    padding-right: 20px;
+                    margin-bottom: 15px;
+
+                    .validation-message {
+                        font-size: vars.$larger-smalltext;
+                    }
+                }
+    
+                label {
+                    margin-bottom: 5px;
+                    font-size: 15px;
+                }
+    
+                input {
+                    width: 100%;
+                    padding: 10px;
+                    border-radius: 5px;
+                    font-size: 16px;
+                }
+    
+                .forgot-password {
+                    font-size: 12px;
+                }
+    
+                .loginbt {
+                    margin-top: 15px;
+    
+                    .btn {
+                        padding: 2%;
+                    }
+                }
+    
+                
+                .regs {
+                    padding: 10px;
+                }
+    
+                .reg {
+                    margin-top: 10px;
+                    font-size: vars.$larger-smalltext;
+                }
+    
+                .terms a {
+                    font-size: vars.$larger-smalltext;
+                    margin-top: 15px;
+                }
+            }
+        }
+    }
+}

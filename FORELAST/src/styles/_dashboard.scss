@@ -1,0 +1,292 @@
+@use "@/styles/variables.scss" as vars;
+
+.forecast-container {
+    display: flex;
+    flex-direction: column;
+
+    .forecast-panels {
+        display: grid;
+        font-family: vars.$primary-font;
+        box-sizing: border-box;
+
+        .weekly-forecast {
+            grid-area: weekly;
+            width: 100%;
+            height: 100%;
+        }
+
+        .optimal-activities, .feels-like, .humidity {
+            background-color: vars.$panel-color;
+            border-radius: vars.$border-radius;
+            overflow: hidden;
+            min-height: 228px;  
+            max-height: 230px;
+        }
+
+        .rainfall {
+            grid-area: rainfall;
+            background-color: vars.$accent-color !important;
+            background-image: url('@/assets/Weather Dashboard/rainfall-svg.svg');
+            background-size: cover;  
+            background-position: center; 
+            background-repeat: no-repeat;
+            border-radius: vars.$border-radius;
+
+            h3 {
+                color: #F6F5F2;
+            }
+
+            p {
+                color: #F6F5F2;
+                font-weight: bold;
+                text-align: right;
+            }
+        }
+
+        .wind-speed {
+            grid-area: wind-speed;
+            background-image: url('@/assets/Weather Dashboard/wind speed-gif.gif');
+            background-size: cover;  
+            background-position: center;  
+            background-repeat: no-repeat;
+            color: vars.$font-color;
+            background-color: white !important;
+            border-radius: vars.$border-radius;
+
+            h3 {
+                text-align: right;
+            }
+
+            p {
+                position: relative;
+                font-weight: bold;
+                text-align: end;
+            }
+        }
+
+        .optimal-activities {
+            grid-area: optimal-activities;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: vars.$font-color;
+        
+            h3 {
+                align-self: center; 
+            }
+        
+            .activity-container {
+                display: flex;
+                flex-direction: row; 
+                justify-content: center;
+                overflow-x: auto; 
+        
+                .activity-items {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: flex-start;
+                    text-wrap: wrap; 
+        
+                    img {
+                        object-fit: contain;
+                    }
+        
+                    h3, p {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+
+        .feels-like {
+            grid-area: feels-like;
+            background-color: #FFF085 !important;
+            background-image: url('@/assets/Weather Dashboard/feelslike.svg');
+            background-size: cover;  
+            background-position: center;  
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-start;
+            color: vars.$font-color;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 5%;
+
+            h3 {
+                height: 0%;
+            }
+
+            p {
+                position: relative;
+                color: vars.$accent-color;
+                text-shadow: vars.$box-shadow;
+                font-weight: bold;
+            }
+        }
+
+        .humidity {
+            grid-area: humidity;
+            background-image: url('@/assets/Weather Dashboard/humidity.svg');
+            background-size: contain;  
+            background-position: right;  
+            background-repeat: no-repeat;
+            color: vars.$font-color;
+            box-sizing: border-box;
+            padding: 5%;
+        }
+    }
+}
+
+// Mobile-Specific Styles
+@media (max-width: 768px) {
+    .forecast-container {
+        .forecast-panels {
+            grid-template-columns: 1fr 1fr; 
+            grid-template-areas: 
+                "weekly weekly"
+                "rainfall wind-speed"
+                "optimal-activities optimal-activities"
+                "feels-like humidity";
+            gap: 10px;
+
+            .weekly-forecast {
+                height: 100%;
+            }
+
+            .rainfall {
+                h3 {
+                    position: relative;
+                    top: 40%;
+                }
+    
+                p {
+                    font-size: 200%;
+                    position: relative;
+                    top: 15%;
+                }
+            }
+
+            .wind-speed {
+                p {
+                    top: 20%;
+                    font-size: 150%;
+                }
+            }
+
+            .optimal-activities {
+                h3 {
+                    height: 2%;
+                }
+            
+                .activity-container {
+                    width: 100%; 
+            
+                    .activity-items {
+                        width: 30%;
+                        height: 100%;
+            
+                        img {
+                            height: 30%;
+                        }
+            
+                        h3, p {
+                            font-size: vars.$mobile-smalltext;
+                        }
+                    }
+                }
+            }
+
+            .feels-like {
+                p {
+                    text-align: right;
+                    left: 0%;
+                    bottom: 15%;
+                    font-size: 2rem;
+                }
+            }
+
+            .humidity {
+                p {
+                    position: relative;
+                    bottom: 10%;
+                    font-size: 150%;
+                }
+            }
+        }
+    }
+}
+
+// Larger Screens
+@media (min-width: 768px) {
+    .forecast-container {
+        .forecast-panels {
+            grid-template-rows: 1fr 1fr;
+            grid-template-columns: 1fr .5fr .5fr; 
+            grid-template-areas: 
+                "weekly rainfall wind-speed"
+                "optimal-activities feels-like humidity";
+            gap: 5px;
+            
+
+            .rainfall {
+                h3 {
+                    font-size: vars.$larger-largetext;
+                    position: relative;
+                    top: 20%;
+                }
+    
+                p {
+                    font-size: 200%;
+                }
+            }
+
+            .wind-speed {
+                p {
+                    top: 40%;
+                    font-size: vars.$larger-largetext;
+                }
+            }
+
+            .optimal-activities {
+                width: 100%; 
+            
+                h3 {
+                    height: 5%;
+                }
+            
+                .activity-container {
+                    width: 100%; 
+            
+                    .activity-items {
+                        width: 30%;
+                        height: 100%;
+            
+                        img {
+                            height: 40%;
+                        }
+            
+                        h3, p {
+                            font-size: vars.$larger-smalltext;
+                        }
+                    }
+                }
+            }
+            
+            .feels-like {
+                p {
+                    bottom: 20%;
+                    font-size: 2.5rem;
+                }
+            }
+
+            .humidity {
+                p {
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+}

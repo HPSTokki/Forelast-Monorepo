@@ -1,0 +1,4 @@
+4/14/2025
+    - Verify weatherFetcher.py (check everyday)
+    - Fix and Finish the multivariate
+    - Arrange backend for prior connection to frontend

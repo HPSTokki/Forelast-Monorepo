@@ -1,0 +1,78 @@
+::-webkit-scrollbar {
+display: none; 
+}
+
+// Layout Styles
+html, body, #app {
+height: 100%;
+margin: 0;
+padding: 0;
+}
+
+.layout {
+    margin: 1%;
+    height: auto;
+}
+
+header {
+    grid-area: header;
+}
+
+main {
+    grid-area: main;
+    display: grid;
+    align-items: flex-start;
+}
+
+footer {
+    grid-area: footer;
+}
+
+// Mobile-Specific Styles
+@media (max-width: 768px) {
+    .layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto; 
+        grid-template-areas:
+        "header"
+        "main"
+        "footer";
+        grid-gap: 1%;
+
+        main {
+            display: grid;
+            grid-template-columns: 1fr; 
+            grid-template-rows: auto auto; 
+            grid-gap: 1%; 
+        }
+    }
+}   
+
+// Larger Screens
+@media (min-width: 769px) {
+    .layout {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+        "header main"
+        "footer footer";
+        grid-gap: 1%;
+
+        main {
+            grid-gap: 1%;
+        }
+    }
+}
+
+// Page Animation
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}

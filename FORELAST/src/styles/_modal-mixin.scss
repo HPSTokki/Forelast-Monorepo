@@ -1,0 +1,151 @@
+@use "@/styles/variables.scss" as vars;
+
+// Modal Mixin
+@mixin modal {
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(5px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .modal {
+        background-color: vars.$panel-color;
+        border-radius: vars.$border-radius;
+        box-shadow: vars.$box-shadow;
+        position: relative;
+        font-family: vars.$primary-font;
+        color: vars.$font-color;
+        padding: 2%;
+    }
+
+    .modal-header {
+        text-align: center;
+        z-index: 1001;
+
+        .close-button {
+            position: absolute;
+            color: vars.$accent-color;
+        }
+    }
+
+    .modal-image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        :deep(img) {
+            height: 10%;
+            width: 10%;
+            object-fit: contain;
+            filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.1));
+        }
+    }
+
+    .modal-body {
+        text-align: center;
+        text-shadow: vars.$text-shadow;
+    }
+
+    .modal-footer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .close-button {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+
+        &:hover {
+            color: vars.$font-color;
+        }
+    }
+
+    .modal-enter-active,
+    .modal-leave-active {
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    
+    .modal-enter-from,
+    .modal-leave-to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    // Mobile-Specific Styles
+    @media (max-width: 768px) {
+        .modal-overlay {
+
+            .modal {
+                width: 70%;
+                height: 30%;
+            }
+
+            .modal-header {
+                font-size: vars.$mobile-smalltext;
+
+                .close-button {
+                    top: 1%;
+                    right: 1%;
+                    font-size: 90%;
+                }
+            }
+
+            .modal-image {
+
+                :deep(img) {
+                    height: 50%;
+                    width: 20%;
+                    object-fit: contain;
+                }
+            }
+
+            .modal-body {
+                font-size: vars.$mobile-fsize;
+            }
+        }
+    }
+
+    // Larger Screens
+    @media (min-width: 769px) {
+        .modal-overlay {
+
+            .modal {
+                width: 25%;
+                height: 25%;
+            }
+
+            .modal-header {
+                font-size: vars.$larger-smalltext;
+
+                .close-button {
+                    top: 2%;
+                    right: 1%;
+                    font-size: 90%;
+                }
+            }
+
+            .modal-image {
+                :deep(img) {
+                    width: 20%;
+                    object-fit: contain;
+                }
+            }
+
+            .modal-body {
+                font-size: vars.$larger-smalltext;
+            }
+        }
+    }
+}

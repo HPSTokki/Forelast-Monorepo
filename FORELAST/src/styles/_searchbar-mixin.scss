@@ -1,0 +1,183 @@
+@use "@/styles/variables.scss" as vars;
+
+// Search Bar Mixin
+@mixin searchBar {
+    .search-container {
+        position: relative;
+        width: auto;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        input {
+            background-image: url('../assets/search-city.svg');
+            background-position: 98%;
+            background-repeat: no-repeat;
+            background-size: 4%;
+            border-radius: vars.$border-radius;
+            box-shadow: vars.$box-shadow;
+            border: solid 0.5px #333333;
+            font-family: vars.$primary-font;
+            outline: none;
+            flex-shrink: 0;
+        }
+
+        .result-box {
+            position: relative;
+            background-color: #FFFFFF;
+            overflow-y: auto;
+            overflow-x: hidden;
+            border-radius: 0px 0px 6px 6px;
+            opacity: 0.9;
+
+            ul {
+                padding-left: 0;
+                margin: 0;
+                font-family: vars.$primary-font;
+                color: vars.$font-color;
+                list-style-type: none;
+
+                li {
+                    font-weight: 400;
+
+                    .weather-item {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        overflow: hidden;
+                        border-radius: vars.$border-radius;
+
+                        &:hover {
+                            background-color: #bde1fc;
+                            cursor: pointer;
+                            transition: 0.2s ease-in-out;
+                        }
+
+                        .city-name {
+                            width: 20%;
+                            padding: 0% 1% 0% 1%;
+                        }
+
+                        .temperature, .add-button {
+                            width: 20%;
+                            padding: 0% 1% 0% 1%;
+                        }
+
+                        .weather-icon {
+                            object-fit: contain;
+                            height: 70px;
+                            width: 70px;
+                        }
+                        
+                        .add-button {
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-end;
+                            height: 100%;
+                            
+                            button {
+                                height: 100%;
+                                border: none;
+                                background: none;
+                                border-radius: 100%;
+                                font-family: vars.$primary-font;
+                                font-weight: 800;
+                                font-size: 150%;
+                                outline: none;
+
+                                &:hover {
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+                    }
+
+                    
+                }
+            }
+    
+            hr {
+                object-position: center;
+            }
+        }
+    }
+
+    // Mobile-Specific Styles 
+    @media (max-width: 768px) {
+        .search-container {
+            height: 20vh;
+
+            input {
+                max-height: 30%;
+                width: 90%;
+                padding: 1%;
+            }
+
+            .result-box {
+                height: 100%;
+                width: 90%;
+
+                ul {
+                    font-size: 80%;
+
+                    li {
+                        .weather-item {
+                            width: 100%;
+                            gap: 2%;
+                            font-size: 80%;
+                        }
+                    }
+                }
+
+                hr {
+                    width: 100%;
+                }   
+
+                .no-results {
+                    font-size: 100%;
+                }
+            }   
+        }
+    }
+
+    // Larger Screens
+    @media (min-width: 769px) {
+        .search-container {
+            height: 30vh;
+
+            input {
+                height: 10%;
+                width: 40%;
+                padding: 1%;
+            }
+
+            .result-box {
+                height: 80%;
+                width: 40%;
+
+                ul {
+                    font-size: 100%;
+
+                    li {
+                        .weather-item {
+                            width: 100%;
+                            gap: 1%;
+                            font-size: 90%;
+                        }
+                    }
+                }
+
+                hr {
+                    width: 100%;
+                }   
+
+                .no-results {
+                    font-size: 80%;
+                }
+            }   
+        }
+    } 
+}

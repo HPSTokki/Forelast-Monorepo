@@ -1,0 +1,140 @@
+@use "@/styles/variables.scss" as vars;
+
+// Weather Card Mixin
+@mixin weatherCard {
+    .card {
+        background-color: #FFFFFF;
+        box-shadow: vars.$box-shadow;
+        border-radius: vars.$border-radius;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 1%;
+        transition: 0.2s ease-in-out;
+        cursor: pointer;
+
+
+        figure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            
+            .weather-svg {
+                object-fit: contain;
+            }
+
+            .city-name {
+                font-weight: bold;
+            }
+
+            .city-name, figcaption {
+                font-family: vars.$primary-font;
+                color: vars.$font-color;
+                transition: 0.2s ease-in-out;
+            }
+        }
+    }
+    .remove-button {
+        position: relative;
+        color: vars.$font-color;
+        background: none;
+        border: none;
+        font-family: vars.$primary-font;
+        font-weight: bold;
+        cursor: pointer;
+        opacity: 0.5;
+        transition: opacity 0.2s ease; 
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+    
+    // Card Animations
+    .forecast-enter-from {
+        opacity: 0;
+        transform: translateY(-20px); 
+    }
+
+    .forecast-enter-active {
+        transition: all 0.3s ease; 
+    }
+    
+    .forecast-enter-to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .forecast-leave-from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .forecast-leave-active {
+        transition: all 0.3s ease; 
+    }
+    
+    .forecast-leave-to {
+        opacity: 0;
+        transform: translateY(-20px); 
+    }
+
+    // Mobile-Specific Styles
+    @media (max-width: 768px) {
+        .card {
+            height: 8rem;
+            width: 30%;
+
+            figure {
+                height: 100%;
+                width: 100%;
+
+                .weather-svg {
+                    height: 100%;
+                    width: 100%;
+                }
+
+                .city-name, figcaption {
+                    font-size: 70%;
+                }
+            }
+        }
+
+        .remove-button {
+            bottom: 90%;
+            left: 40%;
+            font-size: 80%;
+        }
+    }
+
+    // Larger Screens
+    @media (min-width: 769px) {
+        .card {
+            height: 10rem;
+            width: 12%;
+
+            figure {
+                height: 100%;
+                width: 100%;
+            
+                .weather-svg {
+                    height: 120%;
+                    width: 100%;
+                }
+
+                .city-name, figcaption {
+                    font-size: 90%;
+                }
+            }
+        }
+
+        .remove-button {
+            bottom: 88%;
+            left: 40%;
+            font-size: 80%;
+        }
+    }
+}

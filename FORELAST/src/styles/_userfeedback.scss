@@ -1,0 +1,140 @@
+@use '@/styles/variables.scss' as vars;
+
+.feedback-page {
+    background-color: vars.$panel-color;
+    height: 100%;
+    width: 100%;
+    border-radius: vars.$border-radius;
+    box-sizing: border-box;
+    box-shadow: vars.$box-shadow;
+    border: solid 1px vars.$accent-color;
+    font-family: vars.$primary-font;
+    color: vars.$font-color;
+    padding: 0 1% 1% 1%;
+    
+    .header {
+        background-color: vars.$accent-color;
+        text-align: center;
+        color: #FFFFFF;
+    }
+
+    .body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2%;
+
+        .question {
+            margin-bottom: px;
+
+            label {
+                display: block;
+                margin-bottom: 5px;
+
+                input[type="radio"] {
+                    margin-right: 5px;
+                }
+            }
+        }
+
+        hr {
+            width: 100%;
+        }
+    }
+
+    .footer {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        hr {
+            width: 100%;
+        }
+
+        input[type="text"] {
+            font-family: vars.$primary-font;
+            border: none;
+            resize: none;
+            outline: none;
+            height: 4rem;
+            width: 100%;
+        }
+
+        .bug-report {
+            font-family: vars.$primary-font;
+            padding: 0.5rem;
+            margin-top: 5%;
+            border: none;
+            box-sizing: border-box;
+            border-radius: vars.$border-radius;
+            box-shadow: vars.$box-shadow;
+            outline: none;
+        }
+
+        .navigation-buttons {
+            margin-top: 5%;
+            display: flex;
+            gap: 1%;
+            
+            button {
+                border: none;
+                background-color: vars.$accent-color;
+                border-radius: vars.$border-radius;
+                box-shadow: vars.$box-shadow;
+                padding: 1%;
+                font-family: vars.$primary-font;
+                cursor: pointer;
+                transition: 0.3s ease-in-out;
+    
+                &:hover {
+                    background-color: vars.$button-hover;
+                    color: vars.$panel-color;
+                }
+            }
+        }
+    }
+}
+
+// Mobile-Specific Styles
+@media (max-width: 768px) {
+    .feedback-page {
+        .header {
+            font-size: vars.$mobile-smalltext;
+        }
+
+        .body {
+            display: flex;
+            flex-direction: column;
+            font-size: vars.$mobile-fsize;
+
+            .options {
+                font-size: vars.$mobile-smalltext;
+            }
+        }
+        
+        .footer {
+            .bug-report {
+                width: 100%;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    }
+}
+
+// Larger Screens
+@media (min-width: 769px) {
+    .feedback-page {
+        .body {
+            font-size: vars.$larger-smalltext;
+        }
+        
+        .footer {
+            button {
+                width: 20%;
+            }
+        }
+    }
+}

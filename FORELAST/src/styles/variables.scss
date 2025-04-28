@@ -1,0 +1,25 @@
+// Variables.scss - These are the variables to be called when styling each components. //
+
+// Primary Colors - Dominant colors to be used for FORELAST. //
+$accent-color: #74C0FC;
+$panel-color: #F6F5F2;
+$font-color: #333333;
+$button-hover: #47a8f3;
+
+// Auxiliary Styles - Other styles to be used for each components. //
+$primary-font: 'Inter', serif;
+$box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+$text-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+$border-radius: 6px;
+
+// Font Sizes for Mobile
+$mobile-fsize: 1rem;
+$mobile-smalltext: 0.7rem;
+$mobile-largetext: 1.500rem;
+
+// Font Sizes for Larger Screens
+$larger-fsize: 1.125rem;
+$larger-smalltext: 0.8rem;
+$larger-largetext: 2rem;
+
+

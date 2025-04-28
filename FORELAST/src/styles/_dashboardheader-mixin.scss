@@ -1,0 +1,272 @@
+@use "@/styles/variables.scss" as vars;
+
+// Dashboard Header Mixin
+@mixin dashboardHeader {
+    .dashboard-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        background-color: vars.$panel-color;
+        border-radius: vars.$border-radius;
+        box-shadow: vars.$box-shadow;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 1%;
+        font-family: vars.$primary-font;
+        color: vars.$font-color;
+
+        .forecast-details {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+
+            .left-section {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+        
+                h4 {
+                    text-align: center;
+                    margin-bottom: 0.5rem; 
+                }
+                
+                p {
+                    font-weight: bold;
+                    margin-top: 0.2rem; 
+                    margin-bottom: 0.2rem;
+                }
+            }
+        
+            .vertical-line {
+                border-left: 2px solid vars.$font-color;
+                height: 100px;
+                margin: 2%;
+            }
+        
+            .right-section {
+                display: flex;
+                align-items: center;
+        
+                .location {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: auto;
+        
+                    .locationIcon {
+                        height: 3rem;
+                    }
+        
+                    h3 {
+                        font-size: 1.8rem;
+                        white-space: nowrap;
+                    }
+        
+                    .weatherIcon {
+                        height: 9rem;
+                    }
+                }
+        
+                .i-message {
+                    position: relative;
+                    z-index: 10;
+        
+                    img {
+                        height: 2rem;
+                        background-color: vars.$accent-color;
+                        border-radius: vars.$border-radius;
+                        cursor: pointer;
+                        box-shadow: vars.$box-shadow;
+                    }
+        
+                    .message {
+                        position: absolute;
+                        top: 60px;
+                        right: 0;
+                        background-color: #FFFFFF;
+                        border-radius: 10px;
+                        opacity: 0;
+                        transform: translateY(-10px);
+                        pointer-events: none;
+                        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+                        text-wrap: nowrap;
+                    }
+        
+                    &:hover .message {
+                        opacity: 0.8;
+                        transform: translateY(0);
+                        pointer-events: auto;
+                        animation: fadeSlideIn 0.3s ease-in-out forwards;
+                    }
+        
+                    &:not(:hover) .message {
+                        animation: fadeSlideOut 0.3s ease-in-out forwards;
+                    }
+                }
+            }
+        }
+        
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 0.8;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeSlideOut {
+            from {
+                opacity: 0.8;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+    }
+
+    // Mobile-Specific Styles
+    @media (max-width: 768px) {
+        .dashboard-header {
+            height: 25%;
+
+            .search-bar-section {
+                width: 100%;
+                height: 5vh;
+            }
+
+            .forecast-details {
+                gap: 2%;
+                width: 100%;
+    
+                .left-section {
+                    width: 30%;
+                    
+                    h4 {
+                        font-size: vars.$mobile-fsize
+                    }
+                    
+                    p {
+                        font-size: 60%;
+                        text-align: center;
+                    }
+                }
+    
+                .vertical-line {
+                    border-left: 2px solid vars.$font-color;
+                    height: 100px; 
+                }
+    
+                .right-section {
+                    gap: 1%;
+                    
+                    .location {
+                        gap: 1%;
+                        
+                        .locationIcon, .weatherIcon {
+                            object-fit: contain;
+                        }
+    
+                        .locationIcon {
+                            height: 1rem;
+                        }
+    
+                        h3 {
+                            font-size: 1rem;
+                            white-space: nowrap;
+                        }
+    
+                        .weatherIcon {
+                            height: 15%;
+                        }
+                    }
+    
+                    .i-message {
+                        img {
+                            height: 1.5rem;
+                        }
+
+                        .message {
+                            font-size: 0.8rem;
+                            top: 25px;
+                            right: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Larger Screens
+    @media (min-width: 769px) {
+        .dashboard-header {
+            height: 11.5rem;
+
+            .search-bar-section {
+                width: 100%;
+                height: 5vh;
+            }
+
+            .forecast-details {
+                gap: 2%;
+                width: 100%;
+    
+                .left-section {
+                    h4 {
+                        font-weight: 400;
+                        font-size: 150%;
+                    }
+                    p {
+                        font-size: 80%;
+                    }
+                }
+    
+                .vertical-line {
+                    height: 100px; 
+                }
+    
+                .right-section {
+                    gap: 10%;
+                    
+                    .location {
+                        gap: 5%;
+                        
+                        .locationIcon, .weatherIcon {
+                            object-fit: contain;
+                        }
+    
+                        .locationIcon {
+                            height: 3rem;
+                        }
+    
+                        h3 {
+                            font-size: 1.8rem;
+                            white-space: nowrap;
+                        }
+    
+                        .weatherIcon {
+                            height: 100px;
+                        }
+                    }
+    
+                    .message {
+                        font-size: 0.8rem;
+                        top: 35px !important;
+                        right: 200px;
+
+                        img {
+                            height: 2rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

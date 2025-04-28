@@ -1,0 +1,68 @@
+@use "@/styles/variables.scss" as vars;
+
+// Dashboard Navbar Mixin
+@mixin dashboardNavbar {
+    .dashboard-tabs {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        .daily-forecast, .forecast-analytics {
+            border: none;
+            background-color: vars.$panel-color;
+            box-shadow: vars.$box-shadow;
+            font-family: vars.$primary-font;
+            color: vars.$font-color;
+            font-size: 100%;
+            white-space: nowrap;
+            width: 50%;
+            transition: 0.3s ease-in-out;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .daily-forecast {
+            border-radius: 6px 0 0 6px;
+            border-right: solid 0.5px vars.$font-color;
+        }
+
+        .forecast-analytics {
+            border-radius: 0 6px 6px 0;
+            border-left: solid 0.5px vars.$font-color;
+        }
+
+        .daily-forecast:hover, .forecast-analytics:hover {
+            background-color: vars.$accent-color;
+            color: vars.$panel-color;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .router-link-active {
+            background-color: vars.$accent-color;
+            color: vars.$panel-color;
+            font-weight: bold;
+        }
+    }
+
+    // Mobile-Specific Styles
+    @media (max-width: 768px) {
+        .dashboard-tabs {
+            .daily-forecast, .forecast-analytics {
+                padding: 3%;
+                font-size: 0.9em;
+            }
+        }
+    }
+
+    // Larger Screens 
+    @media (min-width: 769px) {
+        .dashboard-tabs {
+            .daily-forecast, .forecast-analytics {
+                padding: 1%;
+            }
+        }
+    }
+}

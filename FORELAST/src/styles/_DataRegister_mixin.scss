@@ -1,0 +1,295 @@
+@use "@/styles/variables.scss" as vars;
+
+@mixin DataRegister {
+	height: auto;
+	font-family: 'Inter', serif;
+	background-color: vars.$panel-color;
+	border-radius: vars.$border-radius;
+	box-shadow: vars.$box-shadow;
+
+	.header {
+		height: 45px;
+
+		h1 {
+			text-align: center;
+			padding: 10px;
+		}
+	}
+
+	.RegForm {
+		width: 100%;
+		height: auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 30px auto;
+		font-family: vars.$primary-font;
+		color: vars.$font-color;
+
+		.register {
+			width: 50%;
+			background-color: #ffffff;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 2%;
+            border-radius: vars.$border-radius;
+
+			h2 {
+				text-align: center;
+				font-weight: bold;
+				margin-top: 5px;
+			}
+		}
+
+		.name {
+			display: flex;
+			gap: 10px;
+
+			.name-input {
+				display: flex;
+				flex-direction: column;
+				width: 50%;
+				font-family: vars.$primary-font;
+
+				label {
+					font-size: 15px;
+					text-align: left;
+					margin-top: 10px;
+					font-weight: bolder;
+				}
+
+				input {
+					padding: 10px;
+					border: 1px solid #ccc;
+					border-radius: 5px;
+					background-color: #e0e0e0;
+					font-size: 14px;
+					width: 100%;
+					box-sizing: border-box;
+					font-family: vars.$primary-font;
+				}
+			}
+		}
+
+		.input {
+			display: flex;
+			flex-direction: column;
+			box-sizing: border-box;
+			width: 100%;
+			font-family: vars.$primary-font;
+
+			.input-group {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				justify-content: center;
+				width: 100%;
+
+				label {
+					font-size: 15px;
+					font-weight: bolder;
+					text-align: left;
+					margin-top: 10px;
+				}
+
+				input {
+					width: 100%;
+					padding: 10px;
+					border: 1px solid #ccc;
+					border-radius: 5px;
+					background-color: #e0e0e0;
+					font-size: 14px;
+					box-sizing: border-box;
+					font-family: vars.$primary-font;
+				}
+			}
+			
+			.validation-message {
+				color: red;
+			}
+		}
+
+		.terms {
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			font-size: 12px;
+			margin-top: 20px;
+
+			.link {
+				color: vars.$font-color;
+			}
+
+			input {
+				width: auto;
+				margin-right: 5px;
+			}
+		}
+
+		.sub {
+			display: flex;
+			justify-content: flex-end;
+			margin-top: 15px;
+
+			.btn {
+                font-family: vars.$primary-font;
+				background-color: vars.$accent-color;
+                font-size: vars.$larger-smalltext;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				width: 30%;
+				height: 40px;
+
+				&:hover {
+					background-color: vars.$button-hover;
+				}
+			}
+		}
+
+		.txt {
+			text-align: center;
+			padding: 10px;
+		}
+
+		.reg {
+			margin-top: 10px;
+			font-size: 14px;
+
+			a {
+				color: vars.$accent-color;
+				text-decoration: none;
+				font-weight: bold;
+
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+
+	// Mobile-Specific Styles
+	@media (max-width: 768px) {
+		.header {
+			height: 45px;
+
+			h1 {
+				padding: 10px;
+			}
+		}
+
+		.RegForm {
+			width: 100%;
+
+			.register {
+				width: 100%;
+			}
+
+			.name {
+				.name-input {
+					width: 50%;
+
+					label {
+						font-size: vars.$mobile-smalltext;
+					}
+
+					input {
+						font-size: vars.$mobile-smalltext;
+					}
+				}
+			}
+
+			.input {
+				.input-group {
+					label {
+						font-size: vars.$mobile-smalltext;
+					}
+
+					input {
+						font-size: vars.$mobile-smalltext;
+					}
+				}
+
+				.validation-message {
+					font-size: vars.$mobile-smalltext;
+				}
+			}
+
+			.terms {
+				font-size: vars.$mobile-smalltext;
+			}
+
+			.sub {
+				.btn {
+					height: 40px;
+				}
+			}
+
+			.reg {
+				font-size: vars.$mobile-smalltext;
+			}
+		}
+	}
+
+	// Larger Screens
+	@media (min-width: 769px) {
+		.header {
+			height: 45px;
+
+			h1 {
+				padding: 10px;
+			}
+		}
+
+		.RegForm {
+			width: 100%;
+
+			.register {
+				width: 50%;
+			}
+
+			.name {
+				.name-input {
+					width: 50%;
+
+					label {
+						font-size: vars.$larger-smalltext;
+					}
+
+					input {
+						font-size: vars.$larger-smalltext;
+					}
+				}
+			}
+
+			.input {
+				.input-group {
+					label {
+						font-size: vars.$larger-smalltext;
+					}
+
+					input {
+						font-size: vars.$larger-smalltext;
+					}
+				}
+
+				.validation-message {
+					font-size: vars.$larger-smalltext;
+				}
+			}
+
+			.terms {
+				font-size: vars.$larger-smalltext;
+			}
+
+			.sub {
+				.btn {
+					height: 40px;
+				}
+			}
+
+			.reg {
+				font-size: vars.$larger-smalltext;
+			}
+		}
+	}
+}
