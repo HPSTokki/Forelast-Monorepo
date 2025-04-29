@@ -117,7 +117,7 @@ const mapToSupportedCity = (cityName) => {
 const fetchCityWeather = async (city) => {
     try {
         const normalizedCity = normalizeCityName(city);
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}api/internal/current/${normalizedCity}/`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/internal/current/${normalizedCity}/`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
