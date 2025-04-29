@@ -25,9 +25,12 @@ def get_news(request):
     api_key = os.getenv('NEWS_API_KEY')
     url = f"https://newsapi.org/v2/everything?q=philippines+weather+climate+heat&language=en&sortBy=publishedAt&apiKey=${api_key}"
     
+    print(api_key)
+    
     try:
         response = requests.get(url)
         data = response.json()
+        print(data)
         return JsonResponse(data, safe=False)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)

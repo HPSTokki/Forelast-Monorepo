@@ -76,6 +76,8 @@ onMounted(async () => {
         const res = await fetch(url)
         const data = await res.json()
 
+        console.log('Fetched news data:', data)
+
         if (data.articles?.length) {
             const filteredArticles = data.articles.filter(article => article.title.length <= 80)
 
