@@ -316,7 +316,7 @@ const submitFeedback = async () => {
     }
 
     try {
-        const response = await fetch('http://localhost:8000/api/submit-feedback/', {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/submit-feedback/`, {
             method: 'POST', body: formData });
             if (!response.ok) {
         throw new Error('Failed to submit feedback.');
