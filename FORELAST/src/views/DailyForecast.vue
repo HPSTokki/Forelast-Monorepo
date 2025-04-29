@@ -59,7 +59,7 @@ const currentWeatherIcon = computed(() => {
 const fetchCurrentWeather = async (city) => {
     try {
         const normalizedCity = city.toLowerCase().replace(' ', '_').replace('ñ', 'n');
-        const response = await fetch(`http://localhost:8000/api/internal/current/${normalizedCity}/`);
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/internal/current/${normalizedCity}/`);
         
         if (!response.ok) throw new Error('Network response was not ok');
         
@@ -88,7 +88,7 @@ const fetchCurrentWeather = async (city) => {
 const fetchWeeklyForecast = async (city) => {
     try {
         const normalizedCity = city.toLowerCase().replace(' ', '_').replace('ñ', 'n');
-        const response = await fetch(`http://localhost:8000/api/internal/analytics/${normalizedCity}/`);
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/internal/analytics/${normalizedCity}/`);
         
         if (!response.ok) throw new Error('Network response was not ok');
         
