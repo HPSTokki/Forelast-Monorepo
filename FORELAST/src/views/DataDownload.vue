@@ -99,7 +99,7 @@ export default {
             try {
                 const normalizedCity = selectedCity.value.toLowerCase().replace(' ', '_').replace('ñ', 'n');
                 const response = await fetch(
-                    `http://localhost:8000/api/internal/analytics/${normalizedCity}/preview/?start_date=${startDate.value}&end_date=${endDate.value}`
+                    `${import.meta.env.VITE_API_BASE_URL}/api/internal/analytics/${normalizedCity}/preview/?start_date=${startDate.value}&end_date=${endDate.value}`
                 );
 
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -126,7 +126,7 @@ export default {
             try {
                 const normalizedCity = selectedCity.value.toLowerCase().replace(' ', '_').replace('ñ', 'n');
                 const response = await fetch(
-                    `http://localhost:8000/api/internal/analytics/${normalizedCity}/download/?start_date=${startDate.value}&end_date=${endDate.value}`
+                    `${import.meta.env.VITE_API_BASE_URL}/api/internal/analytics/${normalizedCity}/download/?start_date=${startDate.value}&end_date=${endDate.value}`
                 );
 
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);

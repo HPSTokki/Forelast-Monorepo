@@ -139,7 +139,7 @@ const otpTimer = ref(60);
 const isResendDisabled = ref(false); 
 let intervalId = null;
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 async function submitEmail() {
     errorMessage.value = '';

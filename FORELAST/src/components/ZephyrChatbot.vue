@@ -104,7 +104,9 @@
   const chatLog = ref(null)
   const isTyping = ref(false)
   
-  const apiURL = import.meta.env.VITE_ZEPHYR_API
+  const VITE_ZEPHYR_API = import.meta.env.VITE_ZEPHYR_API
+  const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+  const apiURL = `${VITE_API_BASE_URL}/api/zephyr/chat/`
   
   const toggleChat = () => {
 	isOpen.value = !isOpen.value

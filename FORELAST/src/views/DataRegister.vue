@@ -91,7 +91,7 @@ const submitForm = async () => {
 	};
 
 	try {
-		const response = await axios.post('http://localhost:8000/api/register/', formData)
+		const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/register/`, formData)
 		if (response.status === 201) {
 		alert('Registration successful')
 			// It should redirect to the .csv table.
