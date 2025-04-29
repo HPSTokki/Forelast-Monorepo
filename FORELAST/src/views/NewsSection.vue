@@ -52,6 +52,9 @@ const others = ref([])
 const topStories = ref([])
 const marqueeNews = ref([])
 
+console.log('API URL:', url)
+console.log('API Key:', key)
+
 // News Date Format
 const formatDate = (dateString) => {
     const date = new Date(dateString)
@@ -70,7 +73,11 @@ const goToArticle = (url) => {
 
 // News API Slices
 onMounted(async () => {
-    const res = await fetch(url)
+    const res = await fetch(url, {
+        headers: {
+            'user-agent': 'Mozilla/5.0'
+        }
+    })
     const data = await res.json()
 
     if (data.articles.length) {
