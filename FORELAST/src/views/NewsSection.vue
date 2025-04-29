@@ -45,15 +45,14 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
-const key = import.meta.env.VITE_NEWS_API_KEY
-const url = `https://newsapi.org/v2/everything?q=philippines+weather+climate+heat&language=en&sortBy=publishedAt&apiKey=${key}`;
+const url = `${import.meta.env.VITE_API_BASE_URL}/api/news`
+
 const featured = ref([])  
 const others = ref([])
 const topStories = ref([])
 const marqueeNews = ref([])
 
 console.log('API URL:', url)
-console.log('API Key:', key)
 
 // News Date Format
 const formatDate = (dateString) => {
@@ -73,20 +72,22 @@ const goToArticle = (url) => {
 
 // News API Slices
 onMounted(async () => {
-    const res = await fetch(url, {
-        headers: {
-            'user-agent': 'Mozilla/5.0'
+    try {
+        const res = await fetch(url)
+        const data = await res.json()
+
+        if (data.articles?.length) {
+            const filteredArticles = data.articles.filter(article => article.title.length <= 80)
+
+            featured.value = filteredArticles.slice(0, 2)  
+            others.value = filteredArticles.slice(2, 3)
+            topStories.value = filteredArticles.slice(3, 6)
+            marqueeNews.value = filteredArticles.slice(0, 10)
+
         }
-    })
-    const data = await res.json()
 
-    if (data.articles.length) {
-        const filteredArticles = data.articles.filter(article => article.title.length <= 80)
-
-        featured.value = filteredArticles.slice(0, 2)  
-        others.value = filteredArticles.slice(2, 3)
-        topStories.value = filteredArticles.slice(3, 6)
-        marqueeNews.value = filteredArticles.slice(0, 10)
+    } catch (err) {
+        console.log('Failed to fetch news:', err)
     }
 })
 </script>

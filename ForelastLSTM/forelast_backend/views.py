@@ -5,7 +5,7 @@ from django.utils.decorators import method_decorator
 import pandas as pd
 from supabase import create_client
 import os
-
+import requests
 import logging
 from datetime import datetime, timedelta
 from django.http import HttpResponse
@@ -19,6 +19,19 @@ ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 if ENVIRONMENT != 'production':
     from dotenv import load_dotenv
     load_dotenv()
+    
+@csrf_exempt
+def get_news(request):
+    api_key = os.getenv('NEWS_API_KEY')
+    url = f"https://newsapi.org/v2/everything?q=philippines+weather+climate+heat&language=en&sortBy=publishedAt&apiKey=${api_key}"
+    
+    try:
+        response = requests.get(url)
+        data = response.json()
+        return JsonResponse(data, safe=False)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+        
 
 class CurrentWeatherAPI(View):
     """API endpoint for getting current weather data only"""
