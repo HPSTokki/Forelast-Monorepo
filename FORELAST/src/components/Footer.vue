@@ -88,7 +88,7 @@ const submitSuggestion = async () => {
         const formData = new FormData()
         formData.append("message", form.value.message)
 
-        const response = await fetch("http://localhost:8000/api/send-suggestion/", {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/send-suggestion/`, {
             method: "POST",
             body: formData
         })
