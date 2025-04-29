@@ -116,7 +116,7 @@ const fetchWeatherData = async (selectedCity) => {
     
     try {
         const response = await axios.get(
-        `http://localhost:8000/api/weather/analytics/${city.value}`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/weather/analytics/${city.value}`,
         {
             headers: {
             'Accept': 'application/json'
@@ -153,7 +153,7 @@ const formatChartData = (apiData) => {
 const fetchTopCities = async () => {
     try {
         const response = await axios.get(
-            'http://localhost:8000/api/weather/top-cities',
+            `${import.meta.env.VITE_API_BASE_URL}/api/weather/top-cities`,
             { headers: { 'Accept': 'application/json' } }
         )
         topCities.value = response.data.top_cities
