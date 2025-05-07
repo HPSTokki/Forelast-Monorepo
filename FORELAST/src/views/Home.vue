@@ -1,7 +1,7 @@
 <template>
     <section class = "quick-forecast">
         <div class = "search-bar-section">
-            <SearchBar @city-selected = "addQuickForecast"/>
+            <SearchBar @city-selected = "addQuickForecast" @location-detected="handleLocationDetected"/>
         </div>
         <div class = "quick-forecast-text">
             <h2>Quick Forecasts</h2>
@@ -9,7 +9,7 @@
                 <img src = "../assets/Home/quick forecast section/time.svg">
                 <p>{{ formattedDateTime }} </p>
             </div>
-            <p class = "quick-forecast-caption">Quickly access weather information for your favorite cities. Tap a card for a more detailed forecast.</p>
+            <p class = "quick-forecast-caption">Quickly access weather information for your favorite cities.</p>
         </div>
         <div class = "weather-cards">
             <TransitionGroup name = "forecast" tag="div" class="weather-cards">
@@ -85,7 +85,7 @@ const closeModal = () => {
     modalOpen.value = false
 }
 
-// Adding and Removing of Quick Forecasts Script
+// Load saved cities on mount
 onMounted(() => {
     const savedCities = localStorage.getItem('quickForecasts')
     if (savedCities) {
@@ -97,9 +97,9 @@ const saveToLocalStorage = () => {
     localStorage.setItem('quickForecasts', JSON.stringify(quickForecasts.value))
 }
 
+// Handle manually added cities
 const addQuickForecast = (cityData) => {
     // Check if city already exists by name
-    console.log("BEFORE STORING:", cityData);
     const exists = quickForecasts.value.some(item => item.city === cityData.city)
     
     const processedData = {
@@ -107,16 +107,43 @@ const addQuickForecast = (cityData) => {
         temperature: cityData.temperature !== '--' ? 
             Math.round(Number(cityData.temperature)) : '--',
         weatherIcon: cityData.weatherIcon || '--',
-        weatherDescription: cityData.weatherDescription || '--'
+        weatherDescription: cityData.weatherDescription || '--',
+        timestamp: Date.now()
     };
-    
-    console.log("AFTER STORING:", processedData);
 
-    if (!exists && quickForecasts.value.length < 5) {
-        quickForecasts.value.push(processedData)
+    if (!exists) {
+        if (quickForecasts.value.length < 5) {
+            quickForecasts.value.unshift(processedData) // Add to beginning
+            saveToLocalStorage()
+        } else {
+            modalOpen.value = true
+        }
+    }
+}
+
+// Handle auto-detected location
+const handleLocationDetected = (locationData) => {
+    const exists = quickForecasts.value.some(item => item.city === locationData.city)
+    
+    const processedData = {
+        city: locationData.city,
+        temperature: locationData.temperature !== '--' ? 
+            Math.round(Number(locationData.temperature)) : '--',
+        weatherIcon: locationData.weatherIcon || '--',
+        weatherDescription: locationData.weatherDescription || '--',
+        timestamp: Date.now()
+    };
+
+    if (!exists) {
+        // If we have space, add the location
+        if (quickForecasts.value.length < 5) {
+            quickForecasts.value.unshift(processedData)
+        } else {
+            // If full, replace the oldest card (last in array)
+            quickForecasts.value.pop()
+            quickForecasts.value.unshift(processedData)
+        }
         saveToLocalStorage()
-    } else if (quickForecasts.value.length >= 5) {
-        modalOpen.value = true
     }
 }
 

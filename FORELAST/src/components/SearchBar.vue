@@ -90,6 +90,8 @@ const getWeatherDescription = (temp) => {
 const getRandomAddition = () => Math.round((Math.random() * 1.0 + 1.5) * 10) / 10;
 
 const mapToSupportedCity = (cityName) => {
+    if (!cityName) return null;
+    
     const cityMap = {
         'quezon': 'Quezon City',
         'pasay': 'Pasay',
@@ -98,6 +100,7 @@ const mapToSupportedCity = (cityName) => {
         'manila': 'Manila',
         'caloocan': 'Caloocan',
         'las piñas': 'Las Piñas',
+        'las pinas': 'Las Piñas', // alternative spelling
         'makati': 'Makati',
         'malabon': 'Malabon',
         'mandaluyong': 'Mandaluyong',
@@ -105,12 +108,29 @@ const mapToSupportedCity = (cityName) => {
         'muntinlupa': 'Muntinlupa',
         'navotas': 'Navotas',
         'parañaque': 'Parañaque',
+        'paranaque': 'Parañaque', // alternative spelling
         'san juan': 'San Juan',
-        'valenzuela': 'Valenzuela'
+        'valenzuela': 'Valenzuela',
+        'quezon city': 'Quezon City',
+        'metro manila': 'Manila',
+        'ncr': 'Manila'
     };
     
-    const lowerName = cityName.toLowerCase();
-    return cityMap[lowerName] || null;
+    const lowerName = cityName.toLowerCase().trim();
+    
+    // First try exact match
+    if (cityMap[lowerName]) {
+        return cityMap[lowerName];
+    }
+    
+    // Then try partial matches
+    for (const [key, value] of Object.entries(cityMap)) {
+        if (lowerName.includes(key)) {
+            return value;
+        }
+    }
+    
+    return null;
 };
 
 // Weather data fetching
@@ -175,17 +195,39 @@ const detectUserLocation = async () => {
         );
         const data = await response.json();
         
-        const address = data.address;
-        let detectedCity = address.city || address.municipality || address.county;
+        console.log('Geolocation data:', data); // Debug log
         
-        if (detectedCity) {
-            detectedCity = mapToSupportedCity(detectedCity);
-            if (detectedCity && items.value.includes(detectedCity)) {
-                const weatherData = await fetchCityWeather(detectedCity);
-                // Emit special event for location detection
-                emit('location-detected', weatherData);
+        const address = data.address;
+        // Try multiple possible city name fields
+        let detectedCity = address.city || address.municipality || address.town || 
+                         address.village || address.county || address.state_district;
+        
+        if (!detectedCity && address.state) {
+            // Sometimes the city is in the state field for Metro Manila
+            if (address.state.includes('Metro Manila') || address.state.includes('National Capital Region')) {
+                detectedCity = 'Manila';
             }
         }
+
+        if (detectedCity) {
+            console.log('Detected location:', detectedCity); // Debug log
+            const supportedCity = mapToSupportedCity(detectedCity);
+            
+            if (supportedCity && items.value.includes(supportedCity)) {
+                const weatherData = await fetchCityWeather(supportedCity);
+                emit('location-detected', {
+                    city: supportedCity,
+                    temperature: weatherData.temperature,
+                    weatherIcon: weatherData.weatherIcon,
+                    weatherDescription: weatherData.weatherDescription
+                });
+                return;
+            } else {
+                console.log('Unsupported city detected:', detectedCity);
+            }
+        }
+        
+        console.log('Could not detect supported city from:', address);
     } catch (error) {
         console.log('Location detection failed:', error);
     }
